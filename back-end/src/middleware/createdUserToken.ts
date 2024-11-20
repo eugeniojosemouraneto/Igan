@@ -3,9 +3,11 @@ import jwt from 'jsonwebtoken'
 
 // interfaces
 import { userToken } from "../interfaces/token.interfaces"
+import { user } from '../interfaces/user.interfaces'
+import { logEndPoint } from "../helpers/endPoint.helpers"
 
 export function createUserToken(
-    user: userToken,
+    user: userToken | user,
     request: FastifyRequest,
     reply: FastifyReply
 ) {
@@ -14,6 +16,7 @@ export function createUserToken(
         name     : user.name,
         email    : user.email
     }, "pi3.14159265359")
+    logEndPoint('middleware', 'middleware', 200, '`User [${user.username}] with token`')
     return reply
         .status(200)
         .send({

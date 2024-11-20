@@ -3,6 +3,7 @@ export interface user {
     username : string
     name     : string
     email    : string
+    password : string
 }
 
 export interface userCreate {
@@ -10,4 +11,9 @@ export interface userCreate {
     name     : string
     email    : string
     password : string 
+}
+
+export interface dataLogin {
+    email    : string
+    password : string
 }

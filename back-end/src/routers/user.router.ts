@@ -10,18 +10,7 @@ export async function userRoutes(fastify: FastifyInstance) {
     
     const controller = new userController()
     
-    fastify.post<{ Body: userCreate }>('/', async (request, reply) => {
-        const {username, name, email} = request.body
-        try {
-            const data = controller.create({ username, name, email })
-            return reply.send(data)
-        }
-        catch(error) {
-            reply.send(error)
-        }
-    })
+    fastify.post('/', controller.create.bind(controller))
 
-    fastify.get('/', (request, reply) => {
-        return reply.send("hello word!!!")
-    })
+    fastify.post('/', controller.login.bind(controller))
 }
